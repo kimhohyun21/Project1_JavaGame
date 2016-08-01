@@ -144,27 +144,32 @@ public class GameView extends JPanel implements Runnable {
 				px = 10 + j * 15;
 			}
 			g.drawImage(pokemon, px, py, 100, 100, this);
-			
-			if((x>px-50&&x<px+50)&&(y>py-30&&y<py+30)){
-				
+
+			if ((x > px - 30 && x < px + 30) && (y > py - 30 && y < py + 30)) {
+
 				g.drawImage(mball, px, py, 100, 100, this);
-				
-				if((py>y-20)){
+
+				if ((py > y )) {
 					pokemon = tk.getImage(" ");
-					g.drawImage(mball, px, py, 100, 100, this);
+					
+					if(px==x && py==y){
+						score++;
+					}
 				}
+					
+					
 			}
-			
-			
 		}
 
 		check();
 	}
 
 
-	public void check() {
-		System.out.println("플레이어x좌표 : " + x + " 플레이어y좌표 : " + y);
-		System.out.println("포켓몬 x좌표 : " + px + " 포켓몬 y좌표 : " + py);
+		public void check() {
+			System.out.println("플레이어x좌표 : " + x + " 플레이어y좌표 : " + y);
+			System.out.println("포켓몬 x좌표 : " + px + " 포켓몬 y좌표 : " + py);
+			System.out.println("score : " + score);
+
 
 		
 	}
