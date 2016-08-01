@@ -1,25 +1,5 @@
 package com.p1.client;
 
-import java.awt.Font;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class ScoreBoard extends JPanel {
-	JLabel la1;
-
-	ScoreBoard() {
-		la1 = new JLabel("작업 부탁합니다.");
-		la1.setFont(new Font("맑은고딕", Font.BOLD, 50));
-		add(la1);
-	}
-
-}
-
-
-
-/*
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -40,7 +20,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 
-public class TestWB extends JFrame {
+public class ScoreBoard extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -56,14 +36,14 @@ public class TestWB extends JFrame {
 	private JTextField textField_10;
 	private JTextField textField_11;
 
-	*//**
+	/**
 	 * Launch the application.
-	 *//*
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestWB frame = new TestWB();
+					ScoreBoard frame = new ScoreBoard();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,10 +52,10 @@ public class TestWB extends JFrame {
 		});
 	}
 
-	*//**
+	/**
 	 * Create the frame.
-	 *//*
-	public TestWB() {
+	 */
+	public ScoreBoard() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
@@ -252,4 +232,3 @@ public class TestWB extends JFrame {
 	
 	}
 }
-*/
