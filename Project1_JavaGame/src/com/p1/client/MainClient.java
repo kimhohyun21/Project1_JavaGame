@@ -43,9 +43,7 @@ public class MainClient extends JFrame implements ActionListener, KeyListener{
 		gv.b1.addActionListener(this);		
 		
 		//키리스너 추가
-		gv.addKeyListener(this);
-		
-		
+		gv.addKeyListener(this);	
 	
 	}
 	
