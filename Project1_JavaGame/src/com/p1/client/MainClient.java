@@ -25,7 +25,7 @@ public class MainClient extends JFrame implements ActionListener, KeyListener{
 		add("SU", signUp);
 		add("WR", wr);
 		add("GV", gv);
-		add("SB", score);
+		//add("SB", score);
 		setSize(1280, 720);
 		setVisible(true);
 		
@@ -70,7 +70,7 @@ public class MainClient extends JFrame implements ActionListener, KeyListener{
 			//키리스너 포커스 점령, 키리스너 작동 조건
 			gv.requestFocus();
 		}else if(e.getSource()==gv.b1){
-			card.show(getContentPane(), "SB");
+			score.setVisible(true);
 		}			
 	}
 	
