@@ -176,6 +176,7 @@ public class GameView extends JPanel implements Runnable {
 				pokemon = tk.getImage(" ");
 				
 			}
+			//텍스트 출력 및 게임 종료 프로세스 필요
 		}	
 
 		check();
