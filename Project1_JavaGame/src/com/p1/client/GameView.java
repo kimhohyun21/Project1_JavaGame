@@ -5,14 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GameView extends JPanel implements Runnable {
-	// 필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼
-	Image back, player, pokemon, mball;
+	// 필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼, 폭탄
+	Image back, player, pokemon, mball, bomb;
 
 	// 플레이어 좌표, 포켓몬 좌표, 몬스터볼 좌표
-	int x = 640, y = 480, px = 0, py = 0, mx, my;
-
-	// 포켓몬 스크롤 속도 제어용 변수
-	int[] cx = { 0 };
+	int x = 640, y = 480, px = 0, py = 0;
 
 	// 플레이어, 포켓몬 이미지 배열
 	String[] player_arr = { "player01_Dft.gif", "player01_Lt.gif", "player01_Rt.gif", "player01_Dft.gif",
@@ -30,10 +27,10 @@ public class GameView extends JPanel implements Runnable {
 	JButton b1;
 
 	// 점수 및 기타 정보
-	int pname; // 플레이어 이름
-	int life; // 플레이어 목숨
-	int score; // 플레이어 점수
-	int time; // 플레이어 시간
+	String pname; // 플레이어 이름
+	int life=5; // 플레이어 목숨
+	int score=0; // 플레이어 점수
+	int time=1; // 플레이어 시간
 
 	// 이미지를 얻는 메소드 생성
 	Toolkit tk = Toolkit.getDefaultToolkit();
@@ -83,9 +80,10 @@ public class GameView extends JPanel implements Runnable {
 		// 배경 이미지 설정
 		back = tk.getImage("img\\Bg_6.jpg");
 
-		// 디폴트 플레이어 설정
+		// 디폴트 이미지 설정
 		player = tk.getImage("img\\player01_dft.gif");
 		mball=tk.getImage("img\\mball.gif");
+		bomb=tk.getImage("img\\pkm_00.gif");
 		
 		// 포켓몬 이미지 생성
 		pokemonSetImage();
@@ -130,7 +128,7 @@ public class GameView extends JPanel implements Runnable {
 
 		for (int i = 0; i < 1; i++) {
 			if (py < 700) {
-				py += 1 + i * 10;
+				py += 2 + i;
 			} else {
 				py = 0;
 			}
@@ -152,12 +150,30 @@ public class GameView extends JPanel implements Runnable {
 			int ph=pokemon.getHeight(this);
 			
 			//플레이어의 이미지 중앙 좌표와 포켓몬 이미지의 범위를 매칭
-			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py && y+(h/2) < py+ph)) {
+			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py+(ph/5) && y+(h/2) < py+ph)) {
+				//로켓단을 만나면 목숨 -1
+				if (pokemon==bomb) {
+					pokemon = tk.getImage("img\\explosion.gif");
+				}else{
 				//포켓몬이 잡히면 몬스터 볼로 이미지 변경
 				pokemon = tk.getImage("img\\mball.gif");
-				if (pokemon==mball) {
-					score++;
 				}
+			}
+			
+			//몬스터 볼이 500이상 내려가면 사라지면서 스코어 카운팅
+			if (pokemon==mball && py>y+10) {				
+				score++;
+				py += 1 + i;
+				pokemon = tk.getImage(" ");
+				
+			}
+			
+			//폭발이 500이상 내려가면 사라지면서 목숨 삭감
+			if (pokemon==bomb && py>y+10) {				
+				life--;
+				py += 1 + i;
+				pokemon = tk.getImage(" ");
+				
 			}
 		}	
 
@@ -169,6 +185,7 @@ public class GameView extends JPanel implements Runnable {
 		System.out.println("플레이어x좌표 : " + x + " 플레이어y좌표 : " + y);
 		System.out.println("포켓몬 x좌표 : " + px + " 포켓몬 y좌표 : " + py);
 		System.out.println("score : " + score);
+		System.out.println("life : " + life);
 	}
 
 }
