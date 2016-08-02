@@ -126,7 +126,7 @@ public class GameView extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		// 배경 이미지 그리기
 		g.drawImage(back, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(player, x, y, 100, 100, this);
+		g.drawImage(player, x, y, player.getWidth(this), player.getHeight(this), this);
 
 		for (int i = 0; i < 1; i++) {
 			if (py < 700) {
