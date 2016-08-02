@@ -142,8 +142,7 @@ public class GameView extends JPanel implements Runnable {
 				pokemon = tk.getImage("img\\" + pokemon_arr[i]);
 				// 포켓몬 x좌표 재배정
 				px = 10 + j * 15;
-			}
-			
+			}			
 			g.drawImage(pokemon, px, py, pokemon.getWidth(this), pokemon.getHeight(this), this);
 			
 			//플레이어와 포켓몬의 이미지 크기 값
@@ -156,7 +155,7 @@ public class GameView extends JPanel implements Runnable {
 			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py && y+(h/2) < py+ph)) {
 				//포켓몬이 잡히면 몬스터 볼로 이미지 변경
 				pokemon = tk.getImage("img\\mball.gif");
-					
+				score++;	
 			}
 		}	
 
@@ -165,6 +164,7 @@ public class GameView extends JPanel implements Runnable {
 
 
 	public void check() {
+		
 		System.out.println("플레이어x좌표 : " + x + " 플레이어y좌표 : " + y);
 		System.out.println("포켓몬 x좌표 : " + px + " 포켓몬 y좌표 : " + py);
 		System.out.println("score : " + score);
