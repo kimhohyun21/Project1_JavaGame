@@ -5,8 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GameView extends JPanel implements Runnable {
-	// 필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼, 폭탄
-	Image back, player, pokemon, mball, bomb;
+	// 필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼, 폭탄, 폭발
+	Image back, player, pokemon, mball, bomb, explo;
 
 	// 플레이어 좌표, 포켓몬 좌표, 몬스터볼 좌표
 	int x = 640, y = 480, px = 0, py = 0;
@@ -84,6 +84,7 @@ public class GameView extends JPanel implements Runnable {
 		player = tk.getImage("img\\player01_dft.gif");
 		mball=tk.getImage("img\\mball.gif");
 		bomb=tk.getImage("img\\pkm_00.gif");
+		explo=tk.getImage("img\\explosion.gif");
 		
 		// 포켓몬 이미지 생성
 		pokemonSetImage();
@@ -151,7 +152,7 @@ public class GameView extends JPanel implements Runnable {
 			
 			//플레이어의 이미지 중앙 좌표와 포켓몬 이미지의 범위를 매칭
 			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py+(ph/5) && y+(h/2) < py+ph)) {
-				//로켓단을 만나면 목숨 -1
+				//냐옹이를 만나면 폭발 이미지로 변경
 				if (pokemon==bomb) {
 					pokemon = tk.getImage("img\\explosion.gif");
 				}else{
@@ -169,7 +170,7 @@ public class GameView extends JPanel implements Runnable {
 			}
 			
 			//폭발이 500이상 내려가면 사라지면서 목숨 삭감
-			if (pokemon==bomb && py>y+10) {				
+			if (pokemon==explo && py>y+10) {				
 				life--;
 				py += 1 + i;
 				pokemon = tk.getImage(" ");
