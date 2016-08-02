@@ -151,12 +151,6 @@ public class GameView extends JPanel implements Runnable {
 			int ph=pokemon.getHeight(this);
 			
 			//플레이어의 이미지 중앙 좌표와 포켓몬 이미지의 범위를 매칭
-<<<<<<< HEAD
-			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py && y+(h/2) < py+ph)) {
-				//포켓몬이 잡히면 몬스터 볼로 이미지 변경
-				pokemon = tk.getImage("img\\mball.gif");
-				score++;	
-=======
 			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py+(ph/5) && y+(h/2) < py+ph)) {
 				//냐옹이를 만나면 폭발 이미지로 변경
 				if (pokemon==bomb) {						
@@ -165,7 +159,6 @@ public class GameView extends JPanel implements Runnable {
 					//다른 포켓몬이 잡히면 몬스터 볼로 이미지 변경
 					pokemon = tk.getImage("img\\mball.gif");
 				}
->>>>>>> branch 'kimhohyun' of https://github.com/kimhohyun21/Project1_JavaGame.git
 			}
 			
 			//몬스터 볼이 500이상 내려가면 사라지면서 스코어 카운팅
