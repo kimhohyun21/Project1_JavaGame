@@ -4,16 +4,18 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GameView extends JPanel implements Runnable{
+public class GameView extends JPanel{
 	//필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼
-	Image back, player, pokemon, mball;
-	
+	Image back, player, pokemon,pokemon2, mball;
 	
 	// 플레이어 좌표, 포켓몬 좌표, 몬스터볼 좌표
-	int x=640, y=480, px=0, py=0, mx, my;
+	int x=640, y=480, px=0,px2=0,py=0, mx, my;
 	
 	// 포켓몬 스크롤 속도 제어용 변수
 	int[] cx = {0}; 
+	
+	//배경 스크롤 용 변수
+	int bx=0;
 	
 	// 플레이어, 포켓몬 이미지 배열
 	String[] player_arr={"player01_Dft.gif", "player01_Lt.gif", "player01_Rt.gif",
@@ -41,7 +43,8 @@ public class GameView extends JPanel implements Runnable{
 	Toolkit tk = Toolkit.getDefaultToolkit();
 	
 	// 쓰레드 생성
-	Thread th;
+	Thread th1,th2;
+	
 
 	//게임 패널 생성	
 	GameView(){
@@ -90,78 +93,166 @@ public class GameView extends JPanel implements Runnable{
 		player=tk.getImage("img\\player01_dft.gif");
 		
 		//포켓몬 이미지 생성
-		pokemonSetImage();
+		//pokemonSetImage();
 		
 		//쓰레드 생성
-		th=new Thread();
-		th.start();
+		//new BackThread().start();
+		th1=new PkmThread();
+		th1.start();
+		th2=new PkmThread2();
+		th2.start();
+	}
+	
+	//배경 스레드
+//	class BackThread extends Thread{
+//		@Override
+//		public void run() {
+//			while(true){
+//				try{
+//					Thread.sleep(50);
+//					repaint();
+//					bx++;
+//				}catch(Exception ex){
+//					ex.printStackTrace();
+//				}
+//			}
+//		}
+//	}
+	
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(back, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(player, x, y, 120, 120, this);
+		g.drawImage(pokemon, px, py, 120, 120, this);
+		g.drawImage(pokemon2, px2, py, 120, 120, this);
 		
 	}
-
-	// 쓰레드 구동
-	public void run() {		
-		paintComponent(getGraphics());
-		paintComponent(getGraphics());
-		try{	
-			Thread.sleep(500000);
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}		
-	} 
 	
+	class PkmThread extends Thread{
+		@Override
+		public void run() {
+			while(true){
+				try{
+					for (int i = 0; i < 1; i++) {
+						if (py < 700) {
+							py += 3;
+						} else {
+							py = 0;
+						}
+						if(py>700){
+							
+							int a=(int)(Math.random()*30);			
+							int j=(int)(Math.random()*77);		
+						
+							//포켓몬 이미지 재배정
+							pokemon=tk.getImage("img\\"+pokemon_arr[a]);
+							//포켓몬 x좌표 재배정	
+							px=10+j*15;	
+						}
+						Thread.sleep(30);
+						repaint();
+					}
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	class PkmThread2 extends Thread{
+		@Override
+		public void run() {
+			while(true){
+				try{
+					for (int i = 0; i < 1; i++) {
+						if (py < 700) {
+							py += 3;
+						} else {
+							py = 0;
+						}
+						if(py>700){
+							
+							int a=(int)(Math.random()*30);			
+							int j=(int)(Math.random()*77);		
+						
+							//포켓몬 이미지 재배정
+							pokemon2=tk.getImage("img\\"+pokemon_arr[a]);
+							//포켓몬 x좌표 재배정	
+							px2=10+j*15;	
+						}
+						Thread.sleep(10);
+						repaint();
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+//	// 쓰레드 구동
+//	public void run() {		
+//		paintComponent(getGraphics());
+//		paintComponent(getGraphics());
+//		try{	
+//			Thread.sleep(500000);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}		
+//	} 
 	
 	//플레이어 그리기 설정
 	public void playerSetImage(int no){
 		player=tk.getImage("img\\"+player_arr[no]);
 	}
 	
-	
 	//포켓몬 그리기 설정
-	public void pokemonSetImage(){			
-		int i=(int)(Math.random()*30);			
-		int j=(int)(Math.random()*77);		
-	
-		//포켓몬 이미지 배정
-		pokemon=tk.getImage("img\\"+pokemon_arr[i]);
-		//포켓몬 x좌표 배정	
-		px=10+j*15;	
-	}
-	
+//	public void pokemonSetImage(){			
+//		int i=(int)(Math.random()*31);			
+//		int j=(int)(Math.random()*77);		
+//	
+//		//포켓몬 이미지 배정
+//		pokemon=tk.getImage("img\\"+pokemon_arr[i]);
+//		//포켓몬 x좌표 배정	
+//		px=10+j*15;	//최대 1150
+//	}
 
 	//그리기 메소드
 	public void paintComponent(Graphics g){
-		// 배경 이미지 그리기
-		g.drawImage(back, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(player, x, y, 120, 120, this);
-		for (int i = 0; i < 1; ++i) {
-			if (py < 700) {
-				py += 1 + i * 3;
-			} else {
-				py = 0;
-			}
-			if(py>=690){
-				i=(int)(Math.random()*30);			
-				int j=(int)(Math.random()*77);		
-			
-				//포켓몬 이미지 재배정
-				pokemon=tk.getImage("img\\"+pokemon_arr[i]);
-				//포켓몬 x좌표 재배정	
-				px=10+j*15;	
-			}
-			
-			g.drawImage(pokemon, px, py, 120, 120, this);
-		}
-		
-		
+//		g.drawImage(back, 0, 0, getWidth(), getHeight(), this);
+//		g.drawImage(player, x, y, 120, 120, this);
+//		for (int i = 0; i < 1; i++) {
+//			if (py < 700) {
+//				py += 1;
+//			} else {
+//				py = 0;
+//			}
+//			if(py>=690){
+//				int a=(int)(Math.random()*30);			
+//				int j=(int)(Math.random()*77);		
+//			
+//				//포켓몬 이미지 재배정
+//				pokemon=tk.getImage("img\\"+pokemon_arr[a]);
+//				//포켓몬 x좌표 재배정	
+//				px=10+j*15;	
+//			}
+//		}
+//		g.drawImage(pokemon, px, py, 120, 120, this);
+//		
+////		// 배경 이미지 그리기
+////		if (bx > -3500) {
+////			g.drawImage(back, bx, 0, getWidth(), getHeight(), this);
+////			bx -= 1;
+////		} else {
+////			bx = 0;
+////		}
+//
 		check();
 	}
 	
 
 	public void check(){
-		System.out.println("플레이어x좌표 : "+x+" 플레이어y좌표 : "+y);
+		//System.out.println("플레이어x좌표 : "+x+" 플레이어y좌표 : "+y);
 		System.out.println("포켓몬 x좌표 : "+px+" 포켓몬 y좌표 : "+py);
 	}
-	
 }
