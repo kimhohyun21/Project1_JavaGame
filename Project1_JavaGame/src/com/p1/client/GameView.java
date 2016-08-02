@@ -153,11 +153,11 @@ public class GameView extends JPanel implements Runnable {
 			//플레이어의 이미지 중앙 좌표와 포켓몬 이미지의 범위를 매칭
 			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py+(ph/5) && y+(h/2) < py+ph)) {
 				//냐옹이를 만나면 폭발 이미지로 변경
-				if (pokemon==bomb) {
+				if (pokemon==bomb) {						
 					pokemon = tk.getImage("img\\explosion.gif");
-				}else{
-				//포켓몬이 잡히면 몬스터 볼로 이미지 변경
-				pokemon = tk.getImage("img\\mball.gif");
+				}else if((pokemon!=bomb)&&(pokemon!=explo)){
+					//다른 포켓몬이 잡히면 몬스터 볼로 이미지 변경
+					pokemon = tk.getImage("img\\mball.gif");
 				}
 			}
 			
