@@ -125,7 +125,7 @@ public class GameView extends JPanel{
 		g.drawImage(player, x, y, 120, 120, this);
 		g.drawImage(pokemon, px, py, 120, 120, this);
 		g.drawImage(pokemon2, px2, py, 120, 120, this);
-		
+		//add
 	}
 	
 	class PkmThread extends Thread{
