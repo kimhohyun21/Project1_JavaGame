@@ -155,7 +155,9 @@ public class GameView extends JPanel implements Runnable {
 			if ((x+(w/2) > px && x+(w/2) < px+pw) && (y+(h/2) > py && y+(h/2) < py+ph)) {
 				//포켓몬이 잡히면 몬스터 볼로 이미지 변경
 				pokemon = tk.getImage("img\\mball.gif");
-					
+				if (pokemon==mball) {
+					score++;
+				}
 			}
 		}	
 
