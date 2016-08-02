@@ -146,9 +146,7 @@ public class GameView extends JPanel implements Runnable {
 			g.drawImage(pokemon, px, py, 100, 100, this);
 
 			if ((x > px - 30 && x < px + 30) && (y > py - 30 && y < py + 30)) {
-
 				g.drawImage(mball, px, py, 100, 100, this);
-
 				if ((py > y )) {
 					pokemon = tk.getImage(" ");
 					
