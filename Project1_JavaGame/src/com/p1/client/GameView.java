@@ -129,7 +129,7 @@ public class GameView extends JPanel implements Runnable {
 
 		for (int i = 0; i < 1; i++) {
 			if (py < 700) {
-				py += 2 + i;
+				py += 1 + i;
 			} else {
 				py = 0;
 			}
