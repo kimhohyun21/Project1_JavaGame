@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GameView extends JPanel implements Runnable {
+	Login login=new Login();
+	
 	// 필요한 요소, 배경, 플레이어, 포켓몬, 몬스터볼, 폭탄, 폭발
 	Image back, player, pokemon, mball, bomb, explo;
 
@@ -27,7 +29,7 @@ public class GameView extends JPanel implements Runnable {
 	JButton b1;
 
 	// 점수 및 기타 정보
-	String pname; // 플레이어 이름
+	String pname=login.tf.getText(); // 플레이어 이름
 	int life=5; // 플레이어 목숨
 	int score=0; // 플레이어 점수
 	int time=1; // 플레이어 시간
@@ -38,45 +40,17 @@ public class GameView extends JPanel implements Runnable {
 	// 쓰레드 생성
 	Thread th;
 
+	
 	// 게임 패널 생성
 	GameView() {
 		// 패널 구성
 		setLayout(null);
 
-		// 점수 및 기타 정보 패널 구성
-		tf1 = new JTextField(10);
-		tf1.setBounds(20, 630, 100, 35);
-		tf1.setBackground(Color.WHITE);
-		tf1.setEditable(false);
-
-		tf2 = new JTextField(10);
-		tf2.setBounds(130, 630, 100, 35);
-		tf2.setBackground(Color.WHITE);
-		tf2.setEditable(false);
-
-		tf3 = new JTextField(10);
-		tf3.setBounds(240, 630, 100, 35);
-		tf3.setBackground(Color.WHITE);
-		tf3.setEditable(false);
-
-		tf4 = new JTextField(10);
-		tf4.setBounds(350, 630, 100, 35);
-		tf4.setBackground(Color.WHITE);
-		tf4.setEditable(false);
-
 		b1 = new JButton("Exit");
+		b1.setBounds(600, 600, 100, 30);
 
-		p = new JPanel();
-		p.setBounds(getX(), 620, 1280, 60);
-		p.setBackground(new Color(0, 100, 0, 200));
-		p.add(b1);
-
-		add(tf1);
-		add(tf2);
-		add(tf3);
-		add(tf4);
-		add(p);
-
+		add(b1);
+		
 		// 배경 이미지 설정
 		back = tk.getImage("img\\Bg_6.jpg");
 
@@ -129,7 +103,7 @@ public class GameView extends JPanel implements Runnable {
 
 		for (int i = 0; i < 1; i++) {
 			if (py < 700) {
-				py += 1 + i;
+				py += 2 + i;
 			} else {
 				py = 0;
 			}
@@ -177,7 +151,10 @@ public class GameView extends JPanel implements Runnable {
 				
 			}
 			//텍스트 출력 및 게임 종료 프로세스 필요
-		}	
+		}
+		g.setFont(new Font("맑은고딕",Font.BOLD, 30));
+		g.drawString("Score: "+score, 130, 630);
+		
 
 		check();
 	}
