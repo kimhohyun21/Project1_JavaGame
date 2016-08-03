@@ -152,8 +152,9 @@ public class GameView extends JPanel implements Runnable {
 			}
 			//텍스트 출력 및 게임 종료 프로세스 필요
 		}
-		g.setFont(new Font("맑은고딕",Font.BOLD, 30));
-		g.drawString("Score: "+score, 130, 630);
+		g.setFont(new Font("맑은고딕",Font.BOLD, 20));
+		g.drawString(pname, 70, 660);
+		g.drawString("Score: "+score, 175, 660);
 		
 
 		check();

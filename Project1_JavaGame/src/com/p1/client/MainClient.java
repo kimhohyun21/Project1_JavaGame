@@ -51,12 +51,12 @@ public class MainClient extends JFrame implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==login.b1){
-			//if(login.loginCheck()==true){
+			if(login.loginCheck()==true){
 				card.show(getContentPane(),"WR");
-				//System.out.println(login.tf.getText());
-			//}else{
-				//return;
-			//}
+				System.out.println(login.tf.getText());
+			}else{
+				return;
+			}
 		}else if(e.getSource()==login.b2){
 			card.show(getContentPane(),"SU");
 		}else if(e.getSource()==signUp.exit){
